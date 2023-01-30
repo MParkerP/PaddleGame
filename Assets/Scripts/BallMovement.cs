@@ -15,7 +15,14 @@ public class BallMovement : MonoBehaviour
     private float speedIncrement = 1.25f;
     private int maxSpeed = 20;
     private float verticalBoundary = 4.8f;
-    private float xBoundary = 12;
+    private float leftXBoundary;
+    private float rightXBoundary;
+
+    private Camera mainCamera;
+    private Vector3 leftEdge;
+    private Vector3 rightEdge;
+
+
     private bool leftOfScreen = false;
     private bool rightOfScreen = false;
 
@@ -43,6 +50,13 @@ public class BallMovement : MonoBehaviour
 
         //get game manager reference
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        //set left and right edge of the screen using viewport so that it works with dynamic screen resolution
+        mainCamera = Camera.main;
+        leftEdge = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        leftXBoundary = leftEdge.x;
+        rightEdge = mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0));
+        rightXBoundary = rightEdge.x;
     }
 
     void FixedUpdate()
@@ -82,11 +96,11 @@ public class BallMovement : MonoBehaviour
     void Update()
     {
         //check for ball position off side of screen and flag it
-        if (transform.position.x < -xBoundary)
+        if (transform.position.x < leftXBoundary)
         {
             leftOfScreen = true;
         } 
-        else if (transform.position.x > xBoundary)
+        else if (transform.position.x > rightXBoundary)
         {
             rightOfScreen = true;
         }

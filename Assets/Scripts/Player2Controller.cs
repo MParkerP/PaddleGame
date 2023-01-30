@@ -9,10 +9,20 @@ public class Player2Controller : MonoBehaviour
     private float speed = 7.5f;
     private float verticalBoundary = 3.9f;
 
+    private Camera mainCamera;
+    private Vector3 leftEgde;
+    private float rightOffset = 6.0f / 32.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+
+        mainCamera = Camera.main;
+        leftEgde = mainCamera.ViewportToWorldPoint(new Vector3(1, 0.5f, 1));
+        leftEgde.x -= rightOffset;
+
+        transform.position = leftEgde;
     }
 
     private void Update()

@@ -9,13 +9,23 @@ public class PlayerController : MonoBehaviour
     private float speed = 7.5f;
     private float verticalBoundary = 3.9f;
 
+    private Camera mainCamera;
+    private Vector3 leftEgde;
+    private float leftOffset = 6.0f / 32.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRb= GetComponent<Rigidbody2D>();
+
+        mainCamera = Camera.main;
+        leftEgde = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, 1));
+        leftEgde.x += leftOffset;
+
+        transform.position = leftEgde;
     }
 
-    private void Update()
+    void Update()
     {
         //keep player below ceiling
         if (transform.position.y >= verticalBoundary)
