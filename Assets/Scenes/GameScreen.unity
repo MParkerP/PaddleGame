@@ -242,6 +242,7 @@ MonoBehaviour:
   ballFlasher: {fileID: 612085248}
   spawnDing: {fileID: 8300000, guid: 2b05e4a7a227c0847b84dfbd714b0216, type: 3}
   scoreSound: {fileID: 8300000, guid: f0fca0b7a71bc904597e5a6f62459503, type: 3}
+  audioMixerGroup: {fileID: 2791810002864970467, guid: d7fa913a798d4e54a82b24d36364b36c, type: 2}
 --- !u!82 &425927407
 AudioSource:
   m_ObjectHideFlags: 0

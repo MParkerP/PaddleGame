@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     private AudioSource scoreAudioSource;
     public AudioClip spawnDing;
     public AudioClip scoreSound;
+    public AudioMixerGroup audioMixerGroup;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,9 @@ public class GameManager : MonoBehaviour
         //get the first audio source for one sound effect and add one for another
         spawnAudioSource = GetComponent<AudioSource>();
         scoreAudioSource = gameObject.AddComponent<AudioSource>();
+
+        spawnAudioSource.outputAudioMixerGroup= audioMixerGroup;
+        scoreAudioSource.outputAudioMixerGroup = audioMixerGroup; 
     }
 
     // Update is called once per frame
