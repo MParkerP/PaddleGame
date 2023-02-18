@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private float verticalInput;
     private float speed = 7.5f;
-    private float verticalBoundary = 3.9f;
+    private float verticalBoundary = 4.15f;
 
     private Camera mainCamera;
     private Vector3 leftEgde;

@@ -128,7 +128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffects:
   - {fileID: 8300000, guid: 9d3ebf312a7721f428fc8eddb25091dd, type: 3}
-  audioMixerGroup: {fileID: 0}
 --- !u!50 &2725095693123246205
 Rigidbody2D:
   serializedVersion: 4

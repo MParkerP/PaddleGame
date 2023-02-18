@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerTwoScoreText;
 
     public GameObject ball;
+    private Rigidbody2D ballRb;
     private Vector3 ballStartingPosition = new Vector3(0, 0, 1);
 
     public GameObject ballFlasher;
@@ -26,11 +27,33 @@ public class GameManager : MonoBehaviour
     private AudioSource scoreAudioSource;
     public AudioClip spawnDing;
     public AudioClip scoreSound;
-    public AudioMixerGroup audioMixerGroup;
+    public AudioMixerGroup effectsAudioMixerGroup;
+    public AudioMixerGroup musicAudioMixerGroup;
+    private float effectsVolume;
+    private float musicVolume;
+
+    public Slider pauseMusicSlider;
+    public Slider pauseEffectsSlider;
+
+    public GameObject pauseMenu;
+
+    public GameObject player1;
+    public Rigidbody2D player1Rb;
+    public GameObject player2;
+    public Rigidbody2D player2Rb;
+
+    private AudioSource gameMusic;
+    public AudioClip gameMusicsound;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //get the rigidbody of the ball prefab
+        ballRb = ball.GetComponent<Rigidbody2D>();
+
         //set the text of both scores to the var score (0)
         playerOneScoreText.text = playerOneScore.ToString();
         playerTwoScoreText.text = playerTwoScore.ToString();
@@ -42,9 +65,27 @@ public class GameManager : MonoBehaviour
         //get the first audio source for one sound effect and add one for another
         spawnAudioSource = GetComponent<AudioSource>();
         scoreAudioSource = gameObject.AddComponent<AudioSource>();
+        gameMusic = gameObject.AddComponent<AudioSource>();
+        gameMusic.clip = gameMusicsound;
 
-        spawnAudioSource.outputAudioMixerGroup= audioMixerGroup;
-        scoreAudioSource.outputAudioMixerGroup = audioMixerGroup; 
+        //set the right mixer to audio sources so they can be controlled properly
+        spawnAudioSource.outputAudioMixerGroup= effectsAudioMixerGroup;
+        scoreAudioSource.outputAudioMixerGroup = effectsAudioMixerGroup;
+        gameMusic.outputAudioMixerGroup = musicAudioMixerGroup;
+        gameMusic.loop = true;
+        gameMusic.Play();
+
+
+        effectsAudioMixerGroup.audioMixer.GetFloat("effectsVolume", out effectsVolume);
+        pauseMusicSlider.value = effectsVolume;
+
+        musicAudioMixerGroup.audioMixer.GetFloat("musicVolume", out musicVolume);
+        pauseEffectsSlider.value = musicVolume;
+
+
+
+        
+
     }
 
     // Update is called once per frame
@@ -55,6 +96,30 @@ public class GameManager : MonoBehaviour
         if (numOfBalls < 1)
         {
             StartCoroutine(SpawnBall());
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu.activeSelf)
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
+                gameMusic.Play();
+                player2Rb.constraints = RigidbodyConstraints2D.None;
+                player2Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                player1Rb.constraints = RigidbodyConstraints2D.None;
+                player1Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                ballRb.constraints = RigidbodyConstraints2D.None;
+            }
+            else 
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+                gameMusic.Pause();
+                player1Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                player2Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                ballRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
         }
     }
 

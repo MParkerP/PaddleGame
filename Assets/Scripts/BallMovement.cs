@@ -167,8 +167,7 @@ public class BallMovement : MonoBehaviour
 
     void PlaySoundEffect(AudioSource audioSource, AudioClip audioClip)
     {
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        audioSource.PlayOneShot(audioClip);
     }
 
 

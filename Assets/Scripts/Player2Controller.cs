@@ -7,8 +7,8 @@ public class Player2Controller : MonoBehaviour
     private Rigidbody2D playerRb;
     private float verticalInput;
     private float speed = 7.5f;
-    private float verticalBoundary = 3.9f;
 
+    private float verticalBoundary = 4.15f;
     private Camera mainCamera;
     private Vector3 leftEgde;
     private float rightOffset = 6.0f / 32.0f;
@@ -18,6 +18,7 @@ public class Player2Controller : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>();
 
+        //get the right edge of the screen no matter the screen size and place the player there
         mainCamera = Camera.main;
         leftEgde = mainCamera.ViewportToWorldPoint(new Vector3(1, 0.5f, 1));
         leftEgde.x -= rightOffset;
