@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     private AudioSource scoreAudioSource;
     public AudioClip spawnDing;
     public AudioClip scoreSound;
+    public AudioMixer mainMixer;
     public AudioMixerGroup effectsAudioMixerGroup;
     public AudioMixerGroup musicAudioMixerGroup;
     private float effectsVolume;
@@ -76,11 +77,11 @@ public class GameManager : MonoBehaviour
         gameMusic.Play();
 
 
-        effectsAudioMixerGroup.audioMixer.GetFloat("effectsVolume", out effectsVolume);
-        pauseMusicSlider.value = effectsVolume;
+        mainMixer.GetFloat("effectsVolume", out effectsVolume);
+        pauseEffectsSlider.value = effectsVolume;
 
-        musicAudioMixerGroup.audioMixer.GetFloat("musicVolume", out musicVolume);
-        pauseEffectsSlider.value = musicVolume;
+        mainMixer.GetFloat("musicVolume", out musicVolume);
+        pauseMusicSlider.value = musicVolume;
 
 
 
@@ -88,8 +89,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //checking to see if a ball needs to be spawned
         int numOfBalls = GameObject.FindGameObjectsWithTag("Ball").Length;
@@ -97,10 +97,24 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(SpawnBall());
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseMenu.activeSelf)
+            if (!pauseMenu.activeSelf)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+                gameMusic.Pause();
+                player1Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                player2Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                ballRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+            else 
             {
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1f;
@@ -110,15 +124,6 @@ public class GameManager : MonoBehaviour
                 player1Rb.constraints = RigidbodyConstraints2D.None;
                 player1Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
                 ballRb.constraints = RigidbodyConstraints2D.None;
-            }
-            else 
-            {
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0f;
-                gameMusic.Pause();
-                player1Rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                player2Rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                ballRb.constraints = RigidbodyConstraints2D.FreezeAll;
             }
         }
     }
