@@ -232,8 +232,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 107.8}
-  m_SizeDelta: {x: -0.0014953613, y: 60.716125}
+  m_AnchoredPosition: {x: -104.92908, y: 197.29712}
+  m_SizeDelta: {x: -222.2536, y: 60.7161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &113277544
 MonoBehaviour:
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 208.13148, w: 1.8609848}
+  m_margin: {x: 1.3155289, y: 0, z: -1.017662, w: 1.8609848}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1025,7 +1025,7 @@ GameObject:
   - component: {fileID: 723570381}
   - component: {fileID: 723570380}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1635,9 +1635,10 @@ GameObject:
   - component: {fileID: 1039582293}
   - component: {fileID: 1039582295}
   - component: {fileID: 1039582294}
+  - component: {fileID: 1039582296}
   m_Layer: 5
   m_Name: Slider (1)
-  m_TagString: Untagged
+  m_TagString: Effects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1662,7 +1663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00090017915, y: -63.702892}
+  m_AnchoredPosition: {x: 11.200928, y: 47.29712}
   m_SizeDelta: {x: 368.43, y: 38.7892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1039582294
@@ -1741,6 +1742,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1039582296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039582292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a4733546f231a4292ded7f8046bba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: d7fa913a798d4e54a82b24d36364b36c, type: 2}
 --- !u!1 &1118069467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118069469
@@ -1980,7 +1994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -44.2, y: 35.1}
+  m_AnchoredPosition: {x: -32.99997, y: 146.1}
   m_SizeDelta: {x: -0.0014953613, y: 60.716125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328793689
@@ -2672,8 +2686,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00090892, y: 0.00071263}
-  m_SizeDelta: {x: 368.43, y: 260.71}
+  m_AnchoredPosition: {x: -0.00090892, y: 10.5275}
+  m_SizeDelta: {x: 368.43, y: 281.7636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571848660
 MonoBehaviour:
@@ -2687,6 +2701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0701efc1dd360234c90ce33eface1c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &1674786322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,7 +2935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -44.2, y: -38}
+  m_AnchoredPosition: {x: -33, y: 73}
   m_SizeDelta: {x: -0.0014953613, y: 60.716125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971004129
@@ -3229,9 +3244,10 @@ GameObject:
   - component: {fileID: 2125358293}
   - component: {fileID: 2125358294}
   - component: {fileID: 2125358295}
+  - component: {fileID: 2125358296}
   m_Layer: 5
   m_Name: Slider
-  m_TagString: Untagged
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3256,7 +3272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00090017915, y: 9.397106}
+  m_AnchoredPosition: {x: 11.2009115, y: 120.39712}
   m_SizeDelta: {x: 368.43, y: 38.7892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2125358294
@@ -3335,3 +3351,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: d7fa913a798d4e54a82b24d36364b36c, type: 2}
+--- !u!114 &2125358296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125358292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a4733546f231a4292ded7f8046bba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: d7fa913a798d4e54a82b24d36364b36c, type: 2}

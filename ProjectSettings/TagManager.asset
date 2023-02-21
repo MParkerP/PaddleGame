@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Music
+  - Effects
   layers:
   - Default
   - TransparentFX

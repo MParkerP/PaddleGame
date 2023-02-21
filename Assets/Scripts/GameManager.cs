@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerTwoScoreText;
 
     public GameObject ball;
-    private Rigidbody2D ballRb;
     private Vector3 ballStartingPosition = new Vector3(0, 0, 1);
+    public GameObject currentBall;
+    public Rigidbody2D currentBallRb;
 
     public GameObject ballFlasher;
     private SpriteRenderer ballFlashRenderer;
@@ -52,8 +53,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //get the rigidbody of the ball prefab
-        ballRb = ball.GetComponent<Rigidbody2D>();
 
         //set the text of both scores to the var score (0)
         playerOneScoreText.text = playerOneScore.ToString();
@@ -83,9 +82,9 @@ public class GameManager : MonoBehaviour
         mainMixer.GetFloat("musicVolume", out musicVolume);
         pauseMusicSlider.value = musicVolume;
 
+        StartCoroutine(SpawnBall());
 
 
-        
 
     }
 
@@ -107,23 +106,11 @@ public class GameManager : MonoBehaviour
         {
             if (!pauseMenu.activeSelf)
             {
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0f;
-                gameMusic.Pause();
-                player1Rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                player2Rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                ballRb.constraints = RigidbodyConstraints2D.FreezeAll;
+                PauseGame();
             }
             else 
             {
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1f;
-                gameMusic.Play();
-                player2Rb.constraints = RigidbodyConstraints2D.None;
-                player2Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                player1Rb.constraints = RigidbodyConstraints2D.None;
-                player1Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                ballRb.constraints = RigidbodyConstraints2D.None;
+                UnpauseGame();
             }
         }
     }
@@ -162,8 +149,10 @@ public class GameManager : MonoBehaviour
             ballFlashRenderer.color = initialColor;
             spawnAudioSource.Play();
         }
+        GameObject newBall = Instantiate(ball, ballStartingPosition, ball.transform.rotation);
 
-        Instantiate(ball, ballStartingPosition, ball.transform.rotation);
+        currentBall = newBall;
+        currentBallRb = newBall.GetComponent<Rigidbody2D>();
         ballFlasher.SetActive(false);
 
     }
@@ -174,5 +163,31 @@ public class GameManager : MonoBehaviour
         audioSource.Play();
     }
 
+    public void PauseGame()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        gameMusic.Pause();
+        player1Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        player2Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        if (currentBall != null)
+        {
+            currentBallRb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
 
+    public void UnpauseGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        gameMusic.Play();
+        player2Rb.constraints = RigidbodyConstraints2D.None;
+        player2Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        player1Rb.constraints = RigidbodyConstraints2D.None;
+        player1Rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        if (currentBall != null)
+        {
+            currentBallRb.constraints = RigidbodyConstraints2D.None;
+        }
+    }
 }
